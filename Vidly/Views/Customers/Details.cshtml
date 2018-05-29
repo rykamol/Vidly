@@ -3,13 +3,23 @@
 <div>
     <h4>Customer</h4>
     <hr />
+   
     <dl class="dl-horizontal">
+        <h1>@Model.Name</h1>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.MemberShipType.Name)
         </dt>
 
+
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.MemberShipType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
 
     </dl>

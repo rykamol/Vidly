@@ -215,6 +215,18 @@
     <Compile Include="Migrations\201805291754136_PopulateMemberShipTypeTable.Designer.cs">
       <DependentUpon>201805291754136_PopulateMemberShipTypeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805291833182_AddDataAnotationinCustomarClass.cs" />
+    <Compile Include="Migrations\201805291833182_AddDataAnotationinCustomarClass.Designer.cs">
+      <DependentUpon>201805291833182_AddDataAnotationinCustomarClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805292033281_AddNamePropertyIntoMembershipType.cs" />
+    <Compile Include="Migrations\201805292033281_AddNamePropertyIntoMembershipType.Designer.cs">
+      <DependentUpon>201805292033281_AddNamePropertyIntoMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805292048299_AddDOBPropertyIntoCustomer.cs" />
+    <Compile Include="Migrations\201805292048299_AddDOBPropertyIntoCustomer.Designer.cs">
+      <DependentUpon>201805292048299_AddDOBPropertyIntoCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -311,6 +323,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805291754136_PopulateMemberShipTypeTable.resx">
       <DependentUpon>201805291754136_PopulateMemberShipTypeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805291833182_AddDataAnotationinCustomarClass.resx">
+      <DependentUpon>201805291833182_AddDataAnotationinCustomarClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805292033281_AddNamePropertyIntoMembershipType.resx">
+      <DependentUpon>201805292033281_AddNamePropertyIntoMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805292048299_AddDOBPropertyIntoCustomer.resx">
+      <DependentUpon>201805292048299_AddDOBPropertyIntoCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
