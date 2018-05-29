@@ -207,11 +207,16 @@
     <Compile Include="Migrations\201805291730107_InitialCreate.Designer.cs">
       <DependentUpon>201805291730107_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805291740263_AddMemberShipType.cs" />
+    <Compile Include="Migrations\201805291740263_AddMemberShipType.Designer.cs">
+      <DependentUpon>201805291740263_AddMemberShipType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MemberShipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -296,6 +301,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805291730107_InitialCreate.resx">
       <DependentUpon>201805291730107_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805291740263_AddMemberShipType.resx">
+      <DependentUpon>201805291740263_AddMemberShipType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
