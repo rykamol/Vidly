@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -27,10 +28,27 @@ namespace Vidly.Controllers
             return View(_context.Customers.Include(x => x.MemberShipType).ToList());
         }
 
+        public ActionResult New()
+        {
+            var memberShipTypes = _context.MemberShipTypes.ToList();
+
+            var viewModel = new NewCustomerViewModel()
+            {
+                MemberShipTypes = memberShipTypes
+            };
+            return View(viewModel);
+        }
+
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(x => x.MemberShipType).FirstOrDefault(x => x.Id == id);
             return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult Create(NewCustomerViewModel viewModel)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
