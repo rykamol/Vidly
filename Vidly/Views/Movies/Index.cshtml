@@ -12,6 +12,7 @@
 }
 else
 {
+    <button class="btn btn-primary btn-lg" style="margin-bottom: 15px" id="newMovieButton">Add New Customer</button>
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
@@ -28,4 +29,14 @@ else
         }
         </tbody>
     </table>
+}
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $('#newMovieButton').click(function () {
+            document.location = '@Url.Action("New","Customers")';
+        });
+    </script>
 }

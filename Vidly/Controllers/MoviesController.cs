@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 
 namespace Vidly.Controllers
@@ -23,6 +24,15 @@ namespace Vidly.Controllers
         public ActionResult Index()
         {
             return View(_context.Movies.Include(x => x.Genre).ToList().ToList());
+        }
+
+        public ActionResult New()
+        {
+            var viewModel = new NewMovieViewModel()
+            {
+                Genres = _context.Genres
+            };
+            return View("MovieForm", viewModel);
         }
 
         public ActionResult Details(int id)
