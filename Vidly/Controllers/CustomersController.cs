@@ -35,9 +35,10 @@ namespace Vidly.Controllers
 
             var viewModel = new NewCustomerViewModel()
             {
-                MemberShipTypes = memberShipTypes
+                MemberShipTypes = _context.MemberShipTypes
             };
-            return View(viewModel);
+
+            return View("CustomerForm", viewModel);
         }
 
         public ActionResult Details(int id)
@@ -49,10 +50,23 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Create(NewCustomerViewModel viewModel)
         {
-
             _context.Customers.Add(Mapper.Map<Customer>(viewModel));
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.Include(x => x.MemberShipType).SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return HttpNotFound();
+            var viewModel = new NewCustomerViewModel()
+            {
+                Customer = customer,
+                MemberShipTypes = _context.MemberShipTypes
+            };
+
+            return View("CustomerForm", viewModel);
         }
     }
 }

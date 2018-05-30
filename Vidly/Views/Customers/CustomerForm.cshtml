@@ -15,19 +15,17 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.DateOfBirth)
-        @Html.TextBoxFor(c => c.Customer.DateOfBirth, new { @class = "form-control" })
+        @Html.TextBoxFor(c => c.Customer.DateOfBirth,"{0: d MMM yyyy}", new { @class = "form-control" })
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.MemberShipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MemberShipTypeId,new SelectList(Model.MemberShipTypes,"Id","Name"),"Select Membership Type", new { @class = "form-control" })
+    </div>
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(c => c.Customer.IsSubscribeToNewsLetter) Subscribed for NewsLetter?
         </label>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(c => c.Customer.MemberShipTypeId)
-        @Html.DropDownListFor(c => c.Customer.MemberShipTypeId,new SelectList(@Model.MemberShipTypes,"Id","Name"),"Select Membership Type", new { @class = "form-control" })
-    </div>
-
     <button type="submit" class="btn btn-primary">Create</button>
 
 }
