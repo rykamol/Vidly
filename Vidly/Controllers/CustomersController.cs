@@ -48,9 +48,15 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(NewCustomerViewModel viewModel)
+        public ActionResult Save(NewCustomerViewModel viewModel)
         {
-            _context.Customers.Add(Mapper.Map<Customer>(viewModel));
+            if (viewModel.Customer.Id == 0)
+                _context.Customers.Add(Mapper.Map<Customer>(viewModel));
+            else
+            {
+                var customer = _context.Customers.Single(c => c.Id == viewModel.Customer.Id);
+                Mapper.Map(viewModel, customer);
+            }
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

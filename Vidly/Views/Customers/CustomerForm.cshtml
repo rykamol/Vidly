@@ -7,26 +7,36 @@
 
 <h2>New Customer</h2>
 
-@using (Html.BeginForm("Create", "Customers"))
+@using (Html.BeginForm("Save", "Customers"))
 {
+    
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.Name)
         @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.Name, "", new { @class = "text-danger" }) 
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.DateOfBirth)
-        @Html.TextBoxFor(c => c.Customer.DateOfBirth,"{0: d MMM yyyy}", new { @class = "form-control" })
+        @Html.TextBoxFor(c => c.Customer.DateOfBirth, "{0: d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.DateOfBirth,"", new { @class = "text-danger" }) 
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.MemberShipTypeId)
-        @Html.DropDownListFor(c => c.Customer.MemberShipTypeId,new SelectList(Model.MemberShipTypes,"Id","Name"),"Select Membership Type", new { @class = "form-control" })
+        @Html.DropDownListFor(c => c.Customer.MemberShipTypeId, new SelectList(Model.MemberShipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.MemberShipTypeId, "", new { @class = "text-danger" }) 
     </div>
+    
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(c => c.Customer.IsSubscribeToNewsLetter) Subscribed for NewsLetter?
         </label>
     </div>
+    @Html.HiddenFor(model => model.Customer.Id)
     <button type="submit" class="btn btn-primary">Create</button>
 
 }
 
+@section scripts{
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

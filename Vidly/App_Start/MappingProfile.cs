@@ -11,7 +11,7 @@ namespace Vidly
 
 
             CreateMap<NewCustomerViewModel, Customer>()
-                .ForMember(x => x.Id, opt => opt.Ignore())
+                .ForMember(x => x.Id, opt => opt.MapFrom(model => model.Customer.Id))
                 .ForMember(x => x.MemberShipType, opt => opt.MapFrom(x => x.Customer.MemberShipType))
                 .ForMember(c => c.Name, vm => vm.MapFrom(model => model.Customer.Name))
                 .ForMember(c => c.DateOfBirth, vm => vm.MapFrom(model => model.Customer.DateOfBirth))
