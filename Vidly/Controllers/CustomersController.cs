@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using AutoMapper;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -48,7 +49,10 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Create(NewCustomerViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+
+            _context.Customers.Add(Mapper.Map<Customer>(viewModel));
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
