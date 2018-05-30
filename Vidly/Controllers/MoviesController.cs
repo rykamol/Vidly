@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using AutoMapper;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -33,6 +34,15 @@ namespace Vidly.Controllers
                 Genres = _context.Genres
             };
             return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(NewMovieViewModel viewModel)
+        {
+
+            _context.Movies.Add(Mapper.Map<Movie>(viewModel));
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
