@@ -32,7 +32,8 @@ namespace Vidly.Controllers
         {
             var viewModel = new NewCustomerViewModel()
             {
-                MemberShipTypes = _context.MemberShipTypes
+                MemberShipTypes = _context.MemberShipTypes,
+                Customer = new Customer()
             };
 
             return View("CustomerForm", viewModel);
@@ -50,6 +51,7 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(NewCustomerViewModel viewModel)
         {
+
             if (!ModelState.IsValid)
             {
                 var newCustomer = new NewCustomerViewModel()
@@ -60,6 +62,7 @@ namespace Vidly.Controllers
                 return View("CustomerForm", newCustomer);
             }
 
+
             if (viewModel.Customer.Id == 0)
                 _context.Customers.Add(Mapper.Map<Customer>(viewModel));
             else
@@ -69,6 +72,7 @@ namespace Vidly.Controllers
             }
             _context.SaveChanges();
             return RedirectToAction("Index");
+
         }
 
         public ActionResult Edit(int id)

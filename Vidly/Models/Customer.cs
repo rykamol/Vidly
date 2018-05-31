@@ -11,9 +11,9 @@ namespace Vidly.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        [Display(Name = "Date Of Birth")]
-        [Required(ErrorMessage = "Date of Birth is required.")]
-        public DateTime DateOfBirth { get; set; }
+        [Display(Name = "Birth Date")]
+        [Min18YearsIfAMember]
+        public DateTime? DateOfBirth { get; set; }
 
         public bool IsSubscribeToNewsLetter { get; set; }
 
