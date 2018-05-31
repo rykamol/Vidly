@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -42,21 +43,26 @@ namespace Vidly.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewData = new NewMovieViewModel()
+                var viewData = new NewMovieViewModel(viewModel)
                 {
-                    Movie = viewModel.Movie,
                     Genres = _context.Genres
                 };
                 return View("MovieForm", viewData);
             }
 
-            if (viewModel.Movie.Id == 0)
-                _context.Movies.Add(Mapper.Map<Movie>(viewModel));
+            if (viewModel.Id == 0)
+            {
+                var movie = Mapper.Map<Movie>(viewModel);
+                movie.AddedDate = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
             else
             {
-                var movie = _context.Movies.Include(x => x.Genre).Single(x => x.Id == viewModel.Movie.Id);
+                var movie = _context.Movies.Include(x => x.Genre).Single(x => x.Id == viewModel.Id);
+                movie.AddedDate = DateTime.Now;
                 Mapper.Map(viewModel, movie);
             }
+
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -79,9 +85,10 @@ namespace Vidly.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var viewModel = new NewMovieViewModel()
+            var movieViewModel = Mapper.Map<NewMovieViewModel>(movie);
+
+            var viewModel = new NewMovieViewModel(movieViewModel)
             {
-                Movie = movie,
                 Genres = _context.Genres
             };
             return View("MovieForm", viewModel);

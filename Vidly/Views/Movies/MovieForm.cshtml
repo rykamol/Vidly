@@ -9,52 +9,41 @@
 
 @using (Html.BeginForm("Save","Movies")) 
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+  <div class="form-horizontal">
         <h4>Movie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Movie.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Movie.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Movie.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Movie.RealeaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RealeaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Movie.RealeaseDate, "{0:dd MMM yyyy}", new { @class = "form-control",placeholder="Ex: 12 Jan 1990" })
-                @Html.ValidationMessageFor(model => model.Movie.RealeaseDate)
+                @Html.TextBoxFor(model => model.RealeaseDate, "{0:dd MMM yyyy}", new { @class = "form-control",placeholder="Ex: 12 Jan 1990" })
+                @Html.ValidationMessageFor(model => model.RealeaseDate)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberInStoke, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberInStoke, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumberInStoke)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Movie.AddedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GenreId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Movie.AddedDate,"{0:dd MMM yyyy}",  new { @class = "form-control", placeholder = "Ex: 12 Jan 1990" })
-                @Html.ValidationMessageFor(model => model.Movie.AddedDate)
+                @Html.DropDownListFor(model => model.GenreId,new SelectList(Model.Genres,"Id","Name"),"Select Genre",new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.GenreId)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Movie.NumberInStoke, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Movie.NumberInStoke, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Movie.NumberInStoke)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Movie.GenreId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Movie.GenreId,new SelectList(Model.Genres,"Id","Name"),"Select Genre",new { @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.Movie.GenreId)
-            </div>
-        </div>
-        @Html.HiddenFor(m=>m.Movie.Id)
+        @Html.HiddenFor(m=>m.Id)
         @Html.AntiForgeryToken()
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

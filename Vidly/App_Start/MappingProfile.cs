@@ -9,13 +9,12 @@ namespace Vidly
         public MappingProfile()
         {
             CreateMap<NewMovieViewModel, Movie>()
-                .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Movie.Id))
-                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.Movie.Name))
-                .ForMember(c => c.RealeaseDate, vm => vm.MapFrom(model => model.Movie.RealeaseDate))
-                .ForMember(c => c.AddedDate, vm => vm.MapFrom(model => model.Movie.AddedDate))
-                .ForMember(c => c.GenreId, vm => vm.MapFrom(model => model.Movie.GenreId))
+                .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id))
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.Name))
+                .ForMember(c => c.RealeaseDate, vm => vm.MapFrom(model => model.RealeaseDate))
+                 .ForMember(c => c.GenreId, vm => vm.MapFrom(model => model.GenreId))
                 .ForMember(c => c.NumberInStoke, vm => vm.MapFrom(
-                    model => model.Movie.NumberInStoke))
+                    model => model.NumberInStoke))
                 .ReverseMap();
 
 

@@ -22,7 +22,7 @@ namespace Vidly.Models
         public DateTime AddedDate { get; set; }
 
         [Required]
-        [RegularExpression("([1-9][0-9]*)")]
+        [Range(1, 30)]
         [Display(Name = "Number Of Stock")]
         public int NumberInStoke { get; set; }
 
