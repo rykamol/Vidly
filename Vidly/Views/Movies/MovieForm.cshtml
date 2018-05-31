@@ -55,6 +55,7 @@
             </div>
         </div>
         @Html.HiddenFor(m=>m.Movie.Id)
+        @Html.AntiForgeryToken()
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-primary" value="Create" class="btn btn-default" />
