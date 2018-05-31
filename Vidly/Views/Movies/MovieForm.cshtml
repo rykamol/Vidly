@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.Movie.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Movie.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Movie.Name, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Movie.Name)
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             @Html.LabelFor(model => model.Movie.RealeaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Movie.RealeaseDate, "{0:dd MMM yyyy}", new { @class = "form-control",placeholder="Ex: 12 Jan 1990" })
-                @Html.ValidationMessageFor(model => model.Movie.RealeaseDate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Movie.RealeaseDate)
             </div>
         </div>
 
@@ -35,7 +35,7 @@
             @Html.LabelFor(model => model.Movie.AddedDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Movie.AddedDate,"{0:dd MMM yyyy}",  new { @class = "form-control", placeholder = "Ex: 12 Jan 1990" })
-                @Html.ValidationMessageFor(model => model.Movie.AddedDate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Movie.AddedDate)
             </div>
         </div>
 
@@ -43,7 +43,7 @@
             @Html.LabelFor(model => model.Movie.NumberInStoke, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Movie.NumberInStoke, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Movie.NumberInStoke, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Movie.NumberInStoke)
             </div>
         </div>
 
@@ -51,7 +51,7 @@
             @Html.LabelFor(model => model.Movie.GenreId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Movie.GenreId,new SelectList(Model.Genres,"Id","Name"),"Select Genre",new { @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.Movie.GenreId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Movie.GenreId)
             </div>
         </div>
         @Html.HiddenFor(m=>m.Movie.Id)

@@ -25,14 +25,11 @@ namespace Vidly.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-
             return View(_context.Customers.Include(x => x.MemberShipType).ToList());
         }
 
         public ActionResult New()
         {
-            var memberShipTypes = _context.MemberShipTypes.ToList();
-
             var viewModel = new NewCustomerViewModel()
             {
                 MemberShipTypes = _context.MemberShipTypes
@@ -43,6 +40,9 @@ namespace Vidly.Controllers
 
         public ActionResult Details(int id)
         {
+            if (id < 0)
+                return HttpNotFound();
+
             var customer = _context.Customers.Include(x => x.MemberShipType).FirstOrDefault(x => x.Id == id);
             return View(customer);
         }
@@ -50,6 +50,16 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(NewCustomerViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var newCustomer = new NewCustomerViewModel()
+                {
+                    Customer = viewModel.Customer,
+                    MemberShipTypes = _context.MemberShipTypes
+                };
+                return View("CustomerForm", newCustomer);
+            }
+
             if (viewModel.Customer.Id == 0)
                 _context.Customers.Add(Mapper.Map<Customer>(viewModel));
             else
@@ -63,6 +73,9 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (id < 0)
+                return HttpNotFound();
+
             var customer = _context.Customers.Include(x => x.MemberShipType).SingleOrDefault(c => c.Id == id);
             if (customer == null)
                 return HttpNotFound();

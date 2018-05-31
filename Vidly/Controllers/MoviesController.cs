@@ -39,6 +39,16 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(NewMovieViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewData = new NewMovieViewModel()
+                {
+                    Movie = viewModel.Movie,
+                    Genres = _context.Genres
+                };
+                return View("MovieForm", viewData);
+            }
+
             if (viewModel.Movie.Id == 0)
                 _context.Movies.Add(Mapper.Map<Movie>(viewModel));
             else
@@ -52,12 +62,18 @@ namespace Vidly.Controllers
 
         public ActionResult Details(int id)
         {
+            if (id < 0)
+                return HttpNotFound();
+
             var movie = _context.Movies.Include(m => m.Genre).FirstOrDefault(m => m.Id == id);
             return View(movie);
         }
 
         public ActionResult Edit(int id)
         {
+            if (id < 0)
+                return HttpNotFound();
+
             var movie = _context.Movies.Include(x => x.Genre).Single(x => x.Id == id);
             if (movie == null)
                 return HttpNotFound();
