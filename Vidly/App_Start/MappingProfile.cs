@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Vidly.Dtos;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -8,6 +9,21 @@ namespace Vidly
     {
         public MappingProfile()
         {
+            CreateMap<Customer, CustomerDto>()
+                .ForMember(x => x.MemberShipTypeDto, c => c.MapFrom(m => m.MemberShipType))
+                .ReverseMap();
+
+            //CreateMap<CustomerDto, Customer>()
+            //    .ForMember(c => c.MemberShipType, opt => opt.Ignore())
+            //    .ForMember(c => c.Id, opt => opt.Ignore())
+            //    .ForMember(c => c.Name, opt => opt.MapFrom(dto => dto.Name))
+            //    .ForMember(c => c.DateOfBirth, opt => opt.MapFrom(dto => dto.DateOfBirth))
+            //    .ForMember(c => c.IsSubscribeToNewsLetter, opt => opt.MapFrom(dto => dto.IsSubscribeToNewsLetter))
+            //    .ForMember(c => c.MemberShipTypeId, opt => opt.MapFrom(dto => dto.MemberShipTypeId));
+
+
+            CreateMap<MemberShipType, MemberShipTypeDto>().ReverseMap();
+
             CreateMap<NewMovieViewModel, Movie>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id))
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.Name))
