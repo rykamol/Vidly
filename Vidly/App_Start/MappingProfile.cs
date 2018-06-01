@@ -9,13 +9,27 @@ namespace Vidly
     {
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerDto>()
-                .ForMember(c => c.Id, opt => opt.Ignore())
-                .ForMember(x => x.MemberShipTypeDto, c => c.MapFrom(m => m.MemberShipType));
 
+            CreateMap<MemberShipType, MemberShipTypeDto>().ReverseMap();
+
+            CreateMap<Customer, CustomerDto>()
+                .ForMember(cdto => cdto.MemberShipTypeDto, opt => opt.MapFrom(m => m.MemberShipType))
+                .ForMember(c => c.Id, opt => opt.Ignore());
             CreateMap<CustomerDto, Customer>()
                 .ForMember(c => c.Id, opt => opt.Ignore())
                 .ForMember(x => x.MemberShipType, opt => opt.Ignore());
+
+            CreateMap<GenreDto, Genre>().ReverseMap();
+
+            CreateMap<Movie, MovieDto>()
+                .ForMember(m => m.GenreDto, opt => opt.MapFrom(mdto => mdto.Genre));
+
+            CreateMap<MovieDto, Movie>()
+               .ForMember(m => m.Id, opt => opt.Ignore())
+               .ForMember(m => m.AddedDate, opt => opt.Ignore())
+               .ForMember(m => m.Genre, opt => opt.Ignore());
+
+
 
 
             //CreateMap<CustomerDto, Customer>()
@@ -27,7 +41,6 @@ namespace Vidly
             //    .ForMember(c => c.MemberShipTypeId, opt => opt.MapFrom(dto => dto.MemberShipTypeId));
 
 
-            CreateMap<MemberShipType, MemberShipTypeDto>().ReverseMap();
 
             CreateMap<NewMovieViewModel, Movie>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id))

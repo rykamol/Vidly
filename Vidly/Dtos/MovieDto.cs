@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Vidly.Models
+namespace Vidly.Dtos
 {
-    public class Movie
+    public class MovieDto
     {
         public int Id { get; set; }
 
@@ -17,20 +17,14 @@ namespace Vidly.Models
         public DateTime RealeaseDate { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Adding Date")]
-        public DateTime AddedDate { get; set; }
-
-        [Required]
         [Range(1, 30)]
         [Display(Name = "Number Of Stock")]
         public int NumberInStoke { get; set; }
 
-        public Genre Genre { get; set; }
+        public GenreDto GenreDto { get; set; }
 
         [Required]
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
-
     }
 }
