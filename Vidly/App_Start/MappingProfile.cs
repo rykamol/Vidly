@@ -10,8 +10,13 @@ namespace Vidly
         public MappingProfile()
         {
             CreateMap<Customer, CustomerDto>()
-                .ForMember(x => x.MemberShipTypeDto, c => c.MapFrom(m => m.MemberShipType))
-                .ReverseMap();
+                .ForMember(c => c.Id, opt => opt.Ignore())
+                .ForMember(x => x.MemberShipTypeDto, c => c.MapFrom(m => m.MemberShipType));
+
+            CreateMap<CustomerDto, Customer>()
+                .ForMember(c => c.Id, opt => opt.Ignore())
+                .ForMember(x => x.MemberShipType, opt => opt.Ignore());
+
 
             //CreateMap<CustomerDto, Customer>()
             //    .ForMember(c => c.MemberShipType, opt => opt.Ignore())
