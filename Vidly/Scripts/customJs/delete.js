@@ -1,13 +1,8 @@
 ﻿ 
     $(document).ready(function () {
-        $('#newCustomerButton').click(function () {
-            document.location = '@Url.Action("New","Customers")';
-        });
-
-        $("#customers .js-delete").on("click", function () {
+      $("#customers").on("click", ".js-delete", function () {
             var button = $(this);
-
-            bootbox.confirm({
+          bootbox.confirm({
                 title:"Confirmation Box",
                 message: "Are you sure that you want to delete the customer it?",
                 buttons: {

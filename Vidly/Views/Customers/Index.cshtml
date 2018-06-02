@@ -40,6 +40,12 @@ else
 
 @section scripts
 {
+    <script>
+        $('#newCustomerButton').click(function () {
+            document.location = '@Url.Action("New","Customers")';
+        });
+
+    </script>  
 
     <script src="~/Scripts/customJs/delete.js"></script>
 }
