@@ -13,16 +13,17 @@ namespace Vidly
             CreateMap<MemberShipType, MemberShipTypeDto>().ReverseMap();
 
             CreateMap<Customer, CustomerDto>()
-                .ForMember(cdto => cdto.MemberShipTypeDto, opt => opt.MapFrom(m => m.MemberShipType))
-                .ForMember(c => c.Id, opt => opt.Ignore());
+                .ForMember(cdto => cdto.MemberShipTypeDto, opt => opt.MapFrom(m => m.MemberShipType));
+
             CreateMap<CustomerDto, Customer>()
                 .ForMember(c => c.Id, opt => opt.Ignore())
                 .ForMember(x => x.MemberShipType, opt => opt.Ignore());
 
             CreateMap<GenreDto, Genre>().ReverseMap();
 
+
             CreateMap<Movie, MovieDto>()
-                .ForMember(m => m.GenreDto, opt => opt.MapFrom(mdto => mdto.Genre));
+                .ForMember(mdto => mdto.GenreDto, opt => opt.MapFrom(m => m.Genre));
 
             CreateMap<MovieDto, Movie>()
                .ForMember(m => m.Id, opt => opt.Ignore())

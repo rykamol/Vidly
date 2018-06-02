@@ -28,11 +28,11 @@ namespace Vidly.Controllers.Api
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
             if (movie == null)
                 return NotFound();
 
-            return Ok(movie);
+            return Ok(Mapper.Map<Movie, MovieDto>(movie));
         }
 
         // POST: api/Movies
@@ -44,8 +44,10 @@ namespace Vidly.Controllers.Api
 
             var movie = Mapper.Map<MovieDto, Movie>(movieDto);
             movie.AddedDate = DateTime.Now;
+
             _context.Movies.Add(movie);
             _context.SaveChanges();
+
             movieDto.Id = movie.Id;
 
             return Ok(movieDto);
@@ -53,14 +55,18 @@ namespace Vidly.Controllers.Api
 
         // PUT: api/Movies/5
         [HttpPut]
-        public IHttpActionResult Put(MovieDto movieDto)
+        public IHttpActionResult Put(int id, MovieDto movieDto)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || movieDto.Id != id)
                 return BadRequest();
-            var movie = _context.Movies.SingleOrDefault(m => m.Id == movieDto.Id);
+
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
+
+
             if (movie == null)
                 return NotFound();
 
+            movie.AddedDate = DateTime.Now;
             Mapper.Map(movieDto, movie);
             _context.SaveChanges();
 
@@ -78,7 +84,7 @@ namespace Vidly.Controllers.Api
             _context.Movies.Remove(movie);
             _context.SaveChanges();
 
-            return Ok(movie);
+            return Ok("Deleted Successfull");
         }
     }
 }
