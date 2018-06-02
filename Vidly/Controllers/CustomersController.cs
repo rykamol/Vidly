@@ -25,7 +25,7 @@ namespace Vidly.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View(_context.Customers.Include(x => x.MemberShipType).ToList());
+            return View();
         }
 
         public ActionResult New()
