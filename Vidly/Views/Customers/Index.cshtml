@@ -40,26 +40,6 @@ else
 
 @section scripts
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#newCustomerButton').click(function () {
-                document.location = '@Url.Action("New","Customers")';
-            });
 
-            $("#customers .js-delete").on("click",
-                function () {
-                    var button = $(this);
-                    if (confirm("Are you sure that you want to delete the customer?") === false)
-                        return;
-
-                    $.ajax({
-                        url: "/api/customers/" + button.attr("data-customer-id"),
-                        method: "DELETE",
-                        success: function () {
-                            button.parents("tr").remove();
-                        }
-                    });
-                });
-        });
-    </script>
+    <script src="~/Scripts/customJs/delete.js"></script>
 }
