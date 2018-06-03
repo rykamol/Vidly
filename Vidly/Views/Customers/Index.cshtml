@@ -10,7 +10,7 @@
 <h2>Customer List</h2>
 
 
-<button class="btn btn-primary btn-lg" style="margin-bottom: 15px" id="newCustomerButton">Add New Customer</button>
+<button class="btn btn-primary btn-lg" style="margin-bottom: 15px" id="newCustomerButton"><i class="fa fa-plus"></i>Add New Customer</button>
 <table id="customers" class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
@@ -27,6 +27,7 @@
 @section scripts
 {
     <script src="~/Scripts/customJs/customerDataTable.js"></script>
+    <script src="~/Scripts/customJs/crudCustomer.js"></script>
     <script>
         $('#newCustomerButton').click(function () {
             document.location = '@Url.Action("New","Customers")';
