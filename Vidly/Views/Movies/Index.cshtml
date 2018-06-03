@@ -37,12 +37,12 @@ else
 @section scripts
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+       $(document).ready(function () {
             $('#newMovieButton').click(function () {
                 document.location = '@Url.Action("New","Movies")';
             });
 
-            $("#movies").DataTable({
+           var table= $("#movies").DataTable({
                 ajax: {
                     url: "/api/movies",
                     dataSrc: ""
@@ -59,12 +59,45 @@ else
                         render: function (data) {
                             return "<button class='btn btn-primary js-edit' " +
                                 "data-movie-id=" + data + ">Edit</button> " +
-                                "| <button class='btn btn-primary js-edit'" +
+                                "| <button class='btn btn-danger js-delete'" +
                                 " data-movie-id=" + data + ">Delete</button>";
                         }
                     }
                 ]
-            });
-        });
+           });
+
+           $("#movies").on("click",".js-delete", function () {
+               var button = $(this);
+                bootbox.confirm({
+                           title: "Confirmation Box",
+                           message: "Are you sure that you want to delete the movie?",
+                           buttons: {
+                               confirm: {
+                                   label: 'Yes',
+                                   className: 'btn-success'
+                               },
+                               cancel: {
+                                   label: 'No',
+                                   className: 'btn-danger'
+                               }
+                           },
+                           callback: function(result) {
+                               if (result === false)
+                                   return;
+
+                               $.ajax({
+                                   url: "/api/movies/" + button.attr("data-movie-id"),
+                                   method: "DELETE",
+                                   success: function() {
+                                       table.row(button.parents("tr")).remove().draw();
+                                       //button.parents("tr").remove();
+                                       // location.reload();
+                                   }
+                               });
+                           }
+                       });
+
+               });
+       });
     </script>
 }
